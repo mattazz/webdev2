@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Scanning input from user</h1>
+    <p>We can attach functions to browser events (ie. button clicks, mouse movement, mouse hovers) in order to trigger various functions that provide more interactivity.</p>
+
+
+    <form class="border" action="">
+        <h2>Calculator</h2>
+        <input type="text" placeholder="Number one" id="one">
+        <input type="text" placeholder="Number 2" id="two">
+        <p></p>
+        <button onclick="addNums(event)">Add</button> <!-- onclick allows to trigger a function in JS-->
+        <button onclick="subNums(event)">Subtract</button> <!-- onclick allows to trigger a function in JS-->
+        <button onclick="multNums(event)">Multiply</button> <!-- onclick allows to trigger a function in JS-->
+        <button onclick="divideNums(event)">Divide</button> <!-- onclick allows to trigger a function in JS-->
+
+    </form>
+
+    <h2>Result:</h2>
+    <div id="result"></div>
+
+    <script>
+        function addNums(event){
+            event.preventDefault() //to prevent refreshing, or else it will just erase the results
+
+            //Get the values within the form based on their IDs
+            let x = document.getElementById('one').value
+            let y = document.getElementById('two').value
+
+            x = parseInt(x)
+            y = parseInt(y)
+
+            let sum = x + y
+
+            alert(`Result of ${x} + ${y} is ${sum}`)
+
+            //Output the result in #result's innerHTML
+            document.getElementById("result").innerHTML = `<p> Sum of ${x} and ${y} is ${sum} </p>`
+        }
+        function subNums(event){
+            event.preventDefault() //to prevent refreshing, or else it will just erase the results
+
+            //Get the values within the form based on their IDs
+            let x = document.getElementById('one').value
+            let y = document.getElementById('two').value
+
+            x = parseInt(x)
+            y = parseInt(y)
+
+            let res = x - y
+
+            alert(`Result of ${x} - ${y} is ${res}`)
+
+            //Output the result in #result's innerHTML
+            document.getElementById("result").innerHTML = `<p> Result of ${x} - ${y} is ${res} </p>`
+        }
+        function multNums(event){
+            event.preventDefault() //to prevent refreshing, or else it will just erase the results
+
+            //Get the values within the form based on their IDs
+            let x = document.getElementById('one').value
+            let y = document.getElementById('two').value
+
+            x = parseInt(x)
+            y = parseInt(y)
+
+            let res = x * y
+
+            alert(`Result of ${x} * ${y} is ${res}`)
+
+            //Output the result in #result's innerHTML
+            document.getElementById("result").innerHTML = `<p> Result of ${x} * ${y} is ${res} </p>`
+        }
+        function divideNums(event){
+            event.preventDefault() //to prevent refreshing, or else it will just erase the results
+
+            //Get the values within the form based on their IDs
+            let x = document.getElementById('one').value
+            let y = document.getElementById('two').value
+
+            x = parseInt(x)
+            y = parseInt(y)
+
+            let res = x / y
+
+            alert(`Result of ${x} / ${y} is ${res}`)
+
+            //Output the result in #result's innerHTML
+            document.getElementById("result").innerHTML = `<p> Result of ${x} / ${y} is ${res} </p>`
+        }
+    </script>
+</body>
+</html>

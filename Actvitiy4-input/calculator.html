@@ -1,0 +1,41 @@
+<!DOCTYPE html>`
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Activity: Calculator</h1>
+    <p>I use.</p>
+
+
+    <form class="border" action="">
+        <h2>Complete Name</h2>
+        <p>I'm using onclick in the button element, but I think you can also use onsubmit in the form element.</p>
+        <input type="text" placeholder="First name" id="firstname">
+        <input type="text" placeholder="Last name" id="lastname">
+        <button onclick="getName(event)">Submit</button> <!-- onclick allows to trigger a function in JS-->
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function getName(event){
+            event.preventDefault() //to prevent refreshing, or else it will just erase the results
+
+            alert("Test button")
+
+            //Get the values within the form based on their IDs
+            let firstName = document.getElementById('firstname').value;
+            let lastName = document.getElementById('lastname').value;
+
+            alert(`First name: ${firstName} | Last name: ${lastName}`)
+
+            //Output the result in #result's innerHTML
+            document.getElementById("result").innerHTML = `<p>Your name is ${firstName} ${lastName}</p>`
+        }
+    </script>
+</body>
+</html>
