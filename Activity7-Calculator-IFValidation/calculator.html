@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1>Activity: Calculator</h1>
 
@@ -25,12 +27,22 @@
     <div id="result"></div>
 
     <script>
-        function addNums(event){
+        function addNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results
 
+            // adding a validation using IF
             //Get the values within the form based on their IDs
-            let x = document.getElementById('one').value
-            let y = document.getElementById('two').value
+
+            let x;
+            let y;
+
+            if (document.getElementById('one').value && document.getElementById('two').value) {
+                x = document.getElementById('one').value
+                y = document.getElementById('two').value
+            } else {
+                alert("Must input both number fields")
+                return
+            }
 
             x = parseInt(x)
             y = parseInt(y)
@@ -42,12 +54,20 @@
             //Output the result in #result's innerHTML
             document.getElementById("result").innerHTML = `<p> Sum of ${x} and ${y} is ${sum} </p>`
         }
-        function subNums(event){
+        function subNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results I think because I'm using getElementById to display the results
 
             //Get the values within the form based on their IDs
-            let x = document.getElementById('one').value
-            let y = document.getElementById('two').value
+            let x;
+            let y;
+
+            if (document.getElementById('one').value && document.getElementById('two').value) {
+                x = document.getElementById('one').value
+                y = document.getElementById('two').value
+            } else {
+                alert("Must input both number fields")
+                return
+            }
 
             x = parseInt(x)
             y = parseInt(y)
@@ -59,12 +79,20 @@
             //Output the result in #result's innerHTML
             document.getElementById("result").innerHTML = `<p> Result of ${x} - ${y} is ${res} </p>`
         }
-        function multNums(event){
+        function multNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results
 
             //Get the values within the form based on their IDs
-            let x = document.getElementById('one').value
-            let y = document.getElementById('two').value
+            let x;
+            let y;
+
+            if (document.getElementById('one').value && document.getElementById('two').value) {
+                x = document.getElementById('one').value
+                y = document.getElementById('two').value
+            } else {
+                alert("Must input both number fields")
+                return
+            }
 
             x = parseInt(x)
             y = parseInt(y)
@@ -76,12 +104,20 @@
             //Output the result in #result's innerHTML
             document.getElementById("result").innerHTML = `<p> Result of ${x} * ${y} is ${res} </p>`
         }
-        function divideNums(event){
+        function divideNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results
 
             //Get the values within the form based on their IDs
-            let x = document.getElementById('one').value
-            let y = document.getElementById('two').value
+            let x;
+            let y;
+
+            if (document.getElementById('one').value && document.getElementById('two').value) {
+                x = document.getElementById('one').value
+                y = document.getElementById('two').value
+            } else {
+                alert("Must input both number fields")
+                return
+            }
 
             x = parseInt(x)
             y = parseInt(y)
@@ -95,4 +131,5 @@
         }
     </script>
 </body>
+
 </html>
