@@ -30,17 +30,26 @@
         function addNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results
 
-            // adding a validation using IF
+            //adding a validation using IF
             //Get the values within the form based on their IDs
+            //Note: You can put the document element in a variable and save yourself 
+            //the time from re-typing it over and over x = document.getElementById();
+            let x = document.getElementById('one').value;
+            let y = document.getElementById('two').value;
 
-            let x;
-            let y;
 
-            if (document.getElementById('one').value && document.getElementById('two').value) {
-                x = document.getElementById('one').value
-                y = document.getElementById('two').value
-            } else {
-                alert("Must input both number fields")
+            //Note: This only stops empty fields, but not non-numbers. Find a way to validate those as well. 
+            if (!x && !y) {
+                alert('Please input both numbers.')
+                return
+            } else if (!x) {
+                alert('Please input first number.')
+                return
+            } else if (!y) {
+                alert('Please input second number.')
+                return
+            } else if (isNaN(x) || isNaN(y)) { // this should solve non-number validation
+                alert('Please enter a valid number')
                 return
             }
 
@@ -49,23 +58,30 @@
 
             let sum = x + y
 
-            alert(`Result of ${x} + ${y} is ${sum}`)
+            // alert(`Result of ${x} + ${y} is ${sum}`)
 
             //Output the result in #result's innerHTML
-            document.getElementById("result").innerHTML = `<p> Sum of ${x} and ${y} is ${sum} </p>`
+            document.getElementById("result").innerHTML = `<h3> Sum of ${x} and ${y} is ${sum} </h3>`
         }
         function subNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results I think because I'm using getElementById to display the results
 
             //Get the values within the form based on their IDs
-            let x;
-            let y;
+            let x = document.getElementById('one').value;
+            let y = document.getElementById('two').value;
 
-            if (document.getElementById('one').value && document.getElementById('two').value) {
-                x = document.getElementById('one').value
-                y = document.getElementById('two').value
-            } else {
-                alert("Must input both number fields")
+
+            if (!x && !y) {
+                alert('Please input both numbers.')
+                return
+            } else if (!x) {
+                alert('Please input first number.')
+                return
+            } else if (!y) {
+                alert('Please input second number.')
+                return
+            } else if (isNaN(x) || isNaN(y)) {
+                alert('Please enter a valid number')
                 return
             }
 
@@ -74,23 +90,30 @@
 
             let res = x - y
 
-            alert(`Result of ${x} - ${y} is ${res}`)
+            // alert(`Result of ${x} - ${y} is ${res}`)
 
             //Output the result in #result's innerHTML
-            document.getElementById("result").innerHTML = `<p> Result of ${x} - ${y} is ${res} </p>`
+            document.getElementById("result").innerHTML = `<h3> Result of ${x} - ${y} is ${res} </h3>`
         }
         function multNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results
 
             //Get the values within the form based on their IDs
-            let x;
-            let y;
+            let x = document.getElementById('one').value;
+            let y = document.getElementById('two').value;
 
-            if (document.getElementById('one').value && document.getElementById('two').value) {
-                x = document.getElementById('one').value
-                y = document.getElementById('two').value
-            } else {
-                alert("Must input both number fields")
+
+            if (!x && !y) {
+                alert('Please input both numbers.')
+                return
+            } else if (!x) {
+                alert('Please input first number.')
+                return
+            } else if (!y) {
+                alert('Please input second number.')
+                return
+            } else if (isNaN(x) || isNaN(y)) {
+                alert('Please enter a valid number')
                 return
             }
 
@@ -99,23 +122,30 @@
 
             let res = x * y
 
-            alert(`Result of ${x} * ${y} is ${res}`)
+            // alert(`Result of ${x} * ${y} is ${res}`)
 
             //Output the result in #result's innerHTML
-            document.getElementById("result").innerHTML = `<p> Result of ${x} * ${y} is ${res} </p>`
+            document.getElementById("result").innerHTML = `<h3> Result of ${x} * ${y} is ${res} </h3>`
         }
         function divideNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results
 
             //Get the values within the form based on their IDs
-            let x;
-            let y;
+            let x = document.getElementById('one').value;
+            let y = document.getElementById('two').value;
 
-            if (document.getElementById('one').value && document.getElementById('two').value) {
-                x = document.getElementById('one').value
-                y = document.getElementById('two').value
-            } else {
-                alert("Must input both number fields")
+
+            if (!x && !y) {
+                alert('Please input both numbers.')
+                return
+            } else if (!x) {
+                alert('Please input first number.')
+                return
+            } else if (!y) {
+                alert('Please input second number.')
+                return
+            } else if (isNaN(x) || isNaN(y)) {
+                alert('Please enter a valid number')
                 return
             }
 
@@ -124,10 +154,10 @@
 
             let res = x / y
 
-            alert(`Result of ${x} / ${y} is ${res}`)
+            // alert(`Result of ${x} / ${y} is ${res}`)
 
             //Output the result in #result's innerHTML
-            document.getElementById("result").innerHTML = `<p> Result of ${x} / ${y} is ${res} </p>`
+            document.getElementById("result").innerHTML = `<h3> Result of ${x} / ${y} is ${res} </h3>`
         }
     </script>
 </body>
