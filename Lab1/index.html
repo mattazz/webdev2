@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lab 1: JS Row Manipulation</h1>
+
+    <table id="myTable">
+        <tr>
+            <td>Row1 Col1</td>
+            <td>Row1 Col2</td>
+        </tr>
+        <tr>
+            <td>Row2 Col1</td>
+            <td>Row2 Col2</td>
+        </tr>
+        <tr>
+            <td>Row3 Col1</td>
+            <td>Row3 Col2</td>
+        </tr>
+        <tr>
+            <td>Row4 Col1</td>
+            <td>Row4 Col2</td>
+        </tr>
+        <tr>
+            <td>Row5 Col1</td>
+            <td>Row5 Col2</td>
+        </tr>
+    </table>
+    <br>
+    <div id="message"></div>
+
+    <button type="button" onclick="addRow()">Add Row</button>
+    <button type="button" onclick="delRow()">Delete Row</button>
+
+    <script>
+        let countRow = 5;
+
+        function addRow() {
+            countRow++
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = `Row${countRow} Col1`;
+            cell2.innerHTML = `Row${countRow} Col2`;
+            document.getElementById("message").innerHTML = ""
+            document.getElementById("myTable").style.display = "table" //have to add back the display style since I set to "none" 
+        }
+
+        function delRow() {
+            var table = document.getElementById('myTable');
+            console.log(table.rows)
+            if (table.rows.length > 0) {
+                var row = table.deleteRow(0);
+                if (table.rows.length == 0) {
+                    //Taken from https://www.w3schools.com/jsref/prop_style_display.asp
+                    document.getElementById("myTable").style.display = "none" //I did this because I get this annoying dot because of an empty table
+                }
+            } else {
+                document.getElementById("message").innerHTML = "Message: No more rows to delete."
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

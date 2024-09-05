@@ -26,7 +26,103 @@
     <h2>Result:</h2>
     <div id="result"></div>
 
+
+    <!-- FOR FUN CALC VISUALIZATION -->
+    <div class="border-calc">
+        <div class="LED" id="vis-result">
+        </div>
+
+        <div class="operators-container">
+            <div class="operators-button" onclick="pressOperator()">+</div>
+            <div class="operators-button">-</div>
+            <div class="operators-button">X</div>
+            <div class="operators-button">/</div>
+        </div>
+        <div class="circle-button" onclick="pressOne(1)" id="vis-one">
+            <p>1</p>
+        </div>
+        <div class="circle-button" onclick="pressOne(2)" id="vis-two">
+            <p>2</p>
+        </div>
+        <div class=" circle-button" onclick="pressOne(3)" id="vis-three">
+            <p>3</p>
+        </div>
+        <div class=" circle-button" onclick="pressOne(4)" id="vis-four">
+            <p>4</p>
+        </div>
+        <div class=" circle-button" onclick="pressOne(5)" id="vis-five">
+            <p>5</p>
+        </div>
+        <div class="circle-button" onclick="pressOne(6)" id="vis-six">
+            <p>6</p>
+        </div>
+        <div class="circle-button" onclick="pressOne(7)" id="vis-seven">
+            <p>7</p>
+        </div>
+        <div class="circle-button" onclick="pressOne(8)" id="vis-eight">
+            <p>8</p>
+        </div>
+        <div class="circle-button" onclick="pressOne(9)" id="vis-nine">
+            <p>9</p>
+        </div>
+        <div class="circle-button" onclick="pressOne(0)" id="vis-zero">
+            <p>0</p>
+        </div>
+    </div>
+    <!-- FOR FUN-->
+
+
     <script>
+        // my idea is that two arrays will store the numbers
+        let arr = [] // array has to be outside so it doesn't keep initializing
+        let visNum1;
+        let visNum2;
+
+        function pressOperator() {
+            visNum1 = arr.join('').parseInt
+            arr = []; //reset array
+            console.log("arr: " + arr)
+            console.log("vis1: " + visNum1) // not working
+        }
+        function pressOne(number) {
+            switch (number) {
+                case 0:
+                    arr.push(number);
+                    break;
+                case 1:
+                    arr.push(number);
+                    break;
+                case 2:
+                    arr.push(number);
+                    break;
+                case 3:
+                    arr.push(number);
+                    break;
+                case 4:
+                    arr.push(number);
+                    break;
+                case 5:
+                    arr.push(number);
+                    break;
+                case 6:
+                    arr.push(number);
+                    break;
+                case 7:
+                    arr.push(number);
+                    break;
+                case 8:
+                    arr.push(number);
+                    break;
+                case 9:
+                    arr.push(number);
+                    break;
+                default:
+                    alert("Invalid number");
+            }
+            console.log(arr)
+            document.getElementById('vis-result').innerHTML = arr.join('');
+        }
+
         function addNums(event) {
             event.preventDefault() //to prevent refreshing, or else it will just erase the results
 
