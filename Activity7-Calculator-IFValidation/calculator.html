@@ -29,14 +29,16 @@
 
     <!-- FOR FUN CALC VISUALIZATION -->
     <div class="border-calc">
+        <h1 id="vis-label">VisCalc </h1>
         <div class="LED" id="vis-result">
         </div>
 
         <div class="operators-container">
-            <div class="operators-button" onclick="pressOperator()">+</div>
-            <div class="operators-button">-</div>
-            <div class="operators-button">X</div>
-            <div class="operators-button">/</div>
+            <div class="operators-button" onclick="PressOperator('add')">+</div>
+            <div class="operators-button" onclick="PressOperator('sub')">-</div>
+            <div class=" operators-button" onclick="PressOperator('mult')">X</div>
+            <div class="operators-button" onclick="PressOperator('div')">/</div>
+            <div class="operators-button" onclick="VisCalculate()">=</div>
         </div>
         <div class="circle-button" onclick="pressOne(1)" id="vis-one">
             <p>1</p>
@@ -68,6 +70,9 @@
         <div class="circle-button" onclick="pressOne(0)" id="vis-zero">
             <p>0</p>
         </div>
+        <div class="circle-button" onclick="clearAll()" id="vis-zero">
+            <p>CLR</p>
+        </div>
     </div>
     <!-- FOR FUN-->
 
@@ -77,12 +82,73 @@
         let arr = [] // array has to be outside so it doesn't keep initializing
         let visNum1;
         let visNum2;
+        let operator = "none"
 
-        function pressOperator() {
-            visNum1 = arr.join('').parseInt
-            arr = []; //reset array
-            console.log("arr: " + arr)
-            console.log("vis1: " + visNum1) // not working
+        let visResult = document.getElementById('vis-result')
+
+        function clearAll() {
+            console.log("Clearing all");
+
+            visNum1 = 0
+            visNum2 = 0
+            arr = []
+            visResult.innerHTML = ""
+        }
+
+        function PressOperator(pressedOp) {
+            console.log("Checking switch case: " + pressedOp);
+            operator = pressedOp
+            switch (pressedOp) {
+                case "add":
+                    visResult.innerHTML = "<h1> + </h1>"
+                    break;
+                case "sub":
+                    visResult.innerHTML = "<h1> - </h1>"
+                    break;
+                case "mult":
+                    visResult.innerHTML = "<h1> x </h1>"
+                    break;
+                case "div":
+                    visResult.innerHTML = "<h1> / </h1>"
+                    break;
+            }
+
+            if (!visNum1) {
+                console.log("Storing visNum1");
+                visNum1 = parseInt(arr.join(''))
+                arr = []; //reset array
+            } else {
+                visNum2 = parseInt(arr.join(''))
+            }
+
+            console.log(`visnum1: ${visNum1}`);
+            console.log(`visnum2: ${visNum2}`);
+            console.log(`operator: ${operator}`);
+
+        }
+
+        function VisCalculate() {
+            let result;
+            visNum2 = parseInt(arr.join(''))
+
+            switch (operator) {
+                case "add":
+                    result = visNum1 + visNum2
+                    break;
+                case "sub":
+                    result = visNum1 - visNum2
+                    break;
+                case "mult":
+                    result = visNum1 * visNum2
+                    break;
+                case "div":
+                    result = visNum1 / visNum2
+            }
+
+            result = Math.round(result * 100) / 100
+            console.log(result);
+
+            visResult.innerHTML = `<h1> ${result} </h1>`
         }
         function pressOne(number) {
             switch (number) {
@@ -120,7 +186,7 @@
                     alert("Invalid number");
             }
             console.log(arr)
-            document.getElementById('vis-result').innerHTML = arr.join('');
+            document.getElementById('vis-result').innerHTML = "<h1>" + arr.join('') + "</h1>"
         }
 
         function addNums(event) {
