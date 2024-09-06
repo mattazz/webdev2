@@ -32,7 +32,7 @@
         </tr>
     </table>
     <br>
-    <div id="message"></div>
+    <div id="del-row-message"></div>
 
     <button type="button" onclick="addRow()">Add Product to Row</button>
     <button type="button" onclick="delRow()">Delete Row</button>
@@ -92,6 +92,14 @@
         }
 
         function addRow() {
+            let rowMessage = document.getElementById("del-row-message")
+            if (!(fname && fprice && fserial)) {
+                rowMessage.style.color = "red"
+                rowMessage.innerHTML = "Can't add product with empty values."
+                return;
+            } else{
+                rowMessage.innerHTML = ""
+            }
             countRow++
             var table = document.getElementById("myTable");
             var row = table.insertRow(-1);
@@ -108,21 +116,29 @@
         function delRow() {
             let rowNumber = document.getElementById('del-row').value
             let rowRegex = /^[0-9]+$/
+            let rowMessage = document.getElementById('del-row-message')
+            let table = document.getElementById('myTable');
+
             rowNumber = parseInt(rowNumber)
 
             if (rowRegex.test(rowNumber)) {
                 console.log("Row number valid");
-            } else {
+                rowMessage.innerHTML = ""
+                if (rowNumber == 0) {
+                    rowMessage.innerHTML = "Can't delete header row."
+                }
+            }
+            else {
                 console.log("Row number invalid");
-                alert("Row number invalid")
+                rowMessage.innerHTML = "Not a valid row number to delete"
                 return
             }
 
-            var table = document.getElementById('myTable');
             console.log(table.rows)
 
-            if (table.rows.length > 0) {
-                var row = table.deleteRow(0);
+            if (table.rows.length > 0 && rowNumber != 0) {
+                console.log(rowNumber);
+                table.deleteRow(rowNumber);
                 if (table.rows.length == 0) {
                     //Taken from https://www.w3schools.com/jsref/prop_style_display.asp
                     document.getElementById("myTable").style.display = "none" //I did this because I get this annoying dot because of an empty table
