@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="parent-align">
+        <div id="style-shape"></div>
+        <div id="style-shape2"></div>
+        <div id="style-shape3"></div>
+        <div id="style-shape4"></div>
+        <div class="submit-container">
+            <form action="">
+                <h1>Account Information</h1>
+                <input id="id-user" type="text" placeholder="Username" required onchange="validateUsername()">
+                <input id="id-pass" type="password" placeholder="Password" onchange="validatePassword()" required>
+                <input id="id-email" type="email" placeholder="Email Address" onchange="validateEmail()" required>
+                <input type="text" id="id-mobile" placeholder="Mobile Number" onchange="validateMobile()" required>
+                <p id="user-notice"></p>
+                <p id="pass-notice"></p>
+                <p id="email-notice"></p>
+                <p id="mobile-notice"></p>
+
+                <button type="button" onclick="SubmitValidation()"> Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let userValid = false;
+        let passValid = false;
+        let emailValid = false;
+        let mobileValid = false;
+
+        function SubmitValidation() {
+            if (userValid && passValid && emailValid && mobileValid) {
+                alert("Account created, thank you!")
+                // document.getElementById("id-user").value = ""
+                // document.getElementById("id-pass").value = ""
+                // document.getElementById("user-notice").innerHTML = ""
+                // document.getElementById("pass-notice").innerHTML = ""
+
+                //https://developer.mozilla.org/en-US/docs/Web/API/Location/reload
+                location.reload() //resets the page instead of blanking everything
+            } else {
+                alert("Invalid credentials, please double check the form.")
+            }
+        }
+        function validatePassword() {
+            let passNotice = document.getElementById("pass-notice")
+            let userNotice = document.getElementById("user-notice")
+            let pass = document.getElementById("id-pass").value
+
+            //you can create a reg exp straight with
+            //variables https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+            let symbols = /[!@#$%^&*(),.?":{}|<>]/
+            let numbers = /[0-9]/
+            let letters = /[a-zA-Z]/
+            console.log(passNotice);
+
+            //Validation code to check:
+            // [] Pass length
+            // [] Symbols
+            // [] Numbers
+            if (pass.length < 8) {
+                passNotice.innerHTML = "*Password must be at least 8 characters long. "
+                //You can test your password with the reg exp using test()
+                //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test
+            } else if (!symbols.test(pass)) {
+                passNotice.innerHTML = "*Password must contain at least one symbol."
+            } else if (!numbers.test(pass)) {
+                passNotice.innerHTML = "*Password must contain at least one number."
+            } else if (!letters.test(pass)) {
+                passNotice.innerHTML = "*Password must contain at least one alphabetical letter."
+            }
+            else {
+                passNotice.innerHTML = "✅ Password Valid"
+                passNotice.style.color = "green"
+                passValid = true;
+            }
+        }
+        function validateUsername() {
+            let usernameNotice = document.getElementById("user-notice")
+            let username = document.getElementById('id-user').value;
+
+            // Sample bad words
+            let badWords = ["hell", "shit", "bitch", "fuck"]
+
+            // https://stackoverflow.com/questions/28280920/convert-array-of-words-strings-to-regex-and-use-it-to-get-matches-on-a-string
+            // Joining the array into regexp
+            let badWordsRegex = new RegExp(badWords.join("|"), "i")
+
+            if (badWordsRegex.test(username)) {
+                usernameNotice.innerHTML = "*Username contains bad language"
+            } else if (username.length < 4) {
+                usernameNotice.innerHTML = "*Username cannot be shorter than 4 characters"
+            }
+            else {
+                usernameNotice.innerHTML = "✅ Username valid"
+                usernameNotice.style.color = "green"
+                userValid = true;
+            }
+        }
+
+        function validateEmail() {
+            let emailNotice = document.getElementById("email-notice")
+            let email = document.getElementById("id-email").value
+
+            //https://www.akto.io/tools/email-regex-Javascript-tester
+            let emailRegex = /[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}/
+
+            if (!emailRegex.test(email)) {
+                emailNotice.innerHTML = "*Please enter a valid email address."
+                emailNotice.style.color = "red"
+                emailValid = false;
+            } else {
+                emailNotice.innerHTML = "✅ Email valid"
+                emailNotice.style.color = "green"
+                emailValid = true;
+            }
+        }
+
+        function validateMobile() {
+            let mobileNotice = document.getElementById("mobile-notice")
+            let mobile = document.getElementById("id-mobile").value
+
+            let mobileRegex = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/
+
+            if (!mobileRegex.test(mobile)) {
+                mobileNotice.innerHTML = "*Please enter a valid mobile number"
+                mobileNotice.style.color = "red"
+                mobileValid = false;
+            } else {
+                mobileNotice.innerHTML = "✅ Mobile Number valid"
+                mobileNotice.style.color = "green"
+                mobileValid = true;
+            }
+        }
+    </script>
+</body>
+
+</html>

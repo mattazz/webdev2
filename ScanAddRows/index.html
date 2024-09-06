@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Activity: Form to Row</h1>
+
+    <form action="">
+        <input id="id-name" type="text" placeholder="Product Name" onchange="ValidateName()"> <!-- No numbers-->
+        <input id="id-price" type="text" placeholder="Product Price" onchange="ValidatePrice()">
+        <input id="id-serial" type="text" placeholder="Product Serial" onchange="ValidateSerial()">
+
+        <p id="name-notice"></p>
+        <p id="price-notice"></p>
+        <p id="serial-notice"></p>
+
+    </form>
+
+    <table id="myTable">
+        <tr>
+            <td>Product Name</td>
+            <td>Product Price </td>
+            <td>Product Serial</td>
+        </tr>
+    </table>
+    <br>
+    <div id="message"></div>
+
+    <button type="button" onclick="addRow()">Add Product to Row</button>
+    <button type="button" onclick="delRow()">Delete Row</button>
+    <input id="del-row" type="text" placeholder="Row number to delete">
+
+    <script>
+
+        //validate first
+        let countRow = 0;
+        let fname;
+        let fprice;
+        let fserial;
+
+
+        function ValidateName() {
+            let nameNotice = document.getElementById("name-notice")
+            let name = document.getElementById("id-name").value
+            let nameReg = /[0-9]/
+            console.log("Name: " + name);
+
+            if (nameReg.test(name)) {
+                nameNotice.innerHTML = "Can't contain any numbers"
+            } else {
+                nameNotice.innerHTML = ""
+                fname = name;
+            }
+        }
+
+        function ValidatePrice() {
+            let priceNotice = document.getElementById("price-notice")
+            let price = document.getElementById("id-price").value
+            let priceReg = /^[0-9]+$/
+
+            console.log("Price: " + price);
+
+            if (!priceReg.test(price)) {
+                priceNotice.innerHTML = "Can't contain anything other than numbers."
+            } else {
+                priceNotice.innerHTML = ""
+                fprice = price
+            }
+        }
+
+        function ValidateSerial() {
+            let serialNotice = document.getElementById("serial-notice")
+            let serial = document.getElementById("id-serial").value
+            let serialReg = /^[0-9]+$/
+
+            console.log("Serial: " + serial);
+
+            if (!serialReg.test(serial)) {
+                serialNotice.innerHTML = "Can't contain anything other than numbers."
+            } else {
+                serialNotice.innerHTML = ""
+                fserial = serial
+            }
+        }
+
+        function addRow() {
+            countRow++
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = `${fname}`;
+            cell2.innerHTML = `${fprice}`;
+            cell3.innerHTML = `${fserial}`
+            document.getElementById("message").innerHTML = ""
+            document.getElementById("myTable").style.display = "table" //have to add back the display style since I set to "none" 
+        }
+
+        function delRow() {
+            let rowNumber = document.getElementById('del-row').value
+            let rowRegex = /^[0-9]+$/
+            rowNumber = parseInt(rowNumber)
+
+            if (rowRegex.test(rowNumber)) {
+                console.log("Row number valid");
+            } else {
+                console.log("Row number invalid");
+                alert("Row number invalid")
+                return
+            }
+
+            var table = document.getElementById('myTable');
+            console.log(table.rows)
+
+            if (table.rows.length > 0) {
+                var row = table.deleteRow(0);
+                if (table.rows.length == 0) {
+                    //Taken from https://www.w3schools.com/jsref/prop_style_display.asp
+                    document.getElementById("myTable").style.display = "none" //I did this because I get this annoying dot because of an empty table
+                }
+            } else {
+                document.getElementById("message").innerHTML = "Message: No more rows to delete."
+            }
+
+        }
+    </script>
+
+
+
+</body>
+
+</html>

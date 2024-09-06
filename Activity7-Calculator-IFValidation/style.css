@@ -43,7 +43,7 @@ body {
 .operators-button {
     display: flex;
     border: 1px solid black;
-    box-shadow: 5px 5px rgb(96, 96, 96);
+    box-shadow: 5px 5px rgb(49, 48, 48);
     border-radius: 5px;
     width: 15%;
     height: 50px;
