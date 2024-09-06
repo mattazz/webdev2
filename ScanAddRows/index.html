@@ -8,22 +8,31 @@
             border: 1px solid black;
         }
     </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Activity: Form to Row</h1>
+    <h1 id="title">Activity: Form to Row</h1>
 
-    <form action="">
-        <input id="id-name" type="text" placeholder="Product Name" onchange="ValidateName()"> <!-- No numbers-->
-        <input id="id-price" type="text" placeholder="Product Price" onchange="ValidatePrice()">
-        <input id="id-serial" type="text" placeholder="Product Serial" onchange="ValidateSerial()">
+    <div class="form-container">
+        <h3>Add Products</h3>
+        <form action="">
+            <input id="id-name" type="text" placeholder="Product Name" onchange="ValidateName()"> <!-- No numbers-->
+            <input id="id-price" type="text" placeholder="Product Price" onchange="ValidatePrice()">
+            <input id="id-serial" type="text" placeholder="Product Serial" onchange="ValidateSerial()">
 
-        <p id="name-notice"></p>
-        <p id="price-notice"></p>
-        <p id="serial-notice"></p>
+            <p id="name-notice"></p>
+            <p id="price-notice"></p>
+            <p id="serial-notice"></p>
 
-    </form>
-
+        </form>
+    </div>
+    <div class="buttons-container">
+        <div id="del-row-message"></div>
+        <button type="button" onclick="addRow()">Add Product to Row</button>
+        <button type="button" onclick="delRow()">Delete Row</button>
+        <input id="del-row" type="text" placeholder="Row number to delete">
+    </div>
     <table id="myTable">
         <tr>
             <td>Product Name</td>
@@ -32,11 +41,6 @@
         </tr>
     </table>
     <br>
-    <div id="del-row-message"></div>
-
-    <button type="button" onclick="addRow()">Add Product to Row</button>
-    <button type="button" onclick="delRow()">Delete Row</button>
-    <input id="del-row" type="text" placeholder="Row number to delete">
 
     <script>
 
@@ -69,7 +73,7 @@
             console.log("Price: " + price);
 
             if (!priceReg.test(price)) {
-                priceNotice.innerHTML = "Can't contain anything other than numbers."
+                priceNotice.innerHTML = "Price can't contain anything other than numbers."
             } else {
                 priceNotice.innerHTML = ""
                 fprice = price
@@ -84,7 +88,7 @@
             console.log("Serial: " + serial);
 
             if (!serialReg.test(serial)) {
-                serialNotice.innerHTML = "Can't contain anything other than numbers."
+                serialNotice.innerHTML = "Serial ID can't contain anything other than numbers."
             } else {
                 serialNotice.innerHTML = ""
                 fserial = serial
@@ -97,7 +101,7 @@
                 rowMessage.style.color = "red"
                 rowMessage.innerHTML = "Can't add product with empty values."
                 return;
-            } else{
+            } else {
                 rowMessage.innerHTML = ""
             }
             countRow++
@@ -127,9 +131,14 @@
                 if (rowNumber == 0) {
                     rowMessage.innerHTML = "Can't delete header row."
                 }
+                if (rowNumber + 1 > table.rows.length) {
+                    rowMessage.style.color = "red"
+                    rowMessage.innerHTML = "Row out of bounds"
+                }
             }
             else {
                 console.log("Row number invalid");
+                rowMessage.style.color = "red"
                 rowMessage.innerHTML = "Not a valid row number to delete"
                 return
             }
